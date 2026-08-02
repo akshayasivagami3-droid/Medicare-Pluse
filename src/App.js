@@ -165,6 +165,19 @@ function PageHeader({ eyebrow, title }) {
   );
 }
 
+function SkeletonLoader() {
+  return (
+    <div className="page-enter">
+      <div className="skeleton" style={{ width: '140px', height: '12px', marginBottom: '10px' }} />
+      <div className="skeleton" style={{ width: '260px', height: '32px', marginBottom: '32px' }} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="skeleton" style={{ height: '120px' }} />
+        <div className="skeleton" style={{ height: '120px' }} />
+      </div>
+    </div>
+  );
+}
+
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: '⌂' },
   { id: 'chatbot', label: 'AI Assistant', icon: '💬' },
@@ -414,7 +427,7 @@ function MedicationReminder({ user }) {
     await setDoc(doc(db, 'patients', user.uid, 'medicationLogs', todayKey()), updated);
   }
 
-  if (!loaded) return null;
+  if (!loaded) return <SkeletonLoader />;
 
   const totalDoses = meds.reduce((sum, m) => sum + m.times.length, 0);
   const takenDoses = meds.reduce((sum, m) => sum + m.times.filter(t => todayLog[`${m.id}_${t}`]).length, 0);
@@ -560,7 +573,7 @@ function PatientHistory({ user }) {
 
   async function deleteRecord(id) { await deleteDoc(doc(db, 'patients', user.uid, 'records', id)); }
 
-  if (!loaded) return null;
+  if (!loaded) return <SkeletonLoader />;
 
   return (
     <div>
@@ -794,7 +807,7 @@ function DietPlan({ patient, user }) {
     await setDoc(doc(db, 'patients', user.uid, 'meta', 'dietPlan'), newPlan);
   }
 
-  if (!loaded) return null;
+  if (!loaded) return <SkeletonLoader />;
 
   const rows = plan ? [
     { label: 'Breakfast', value: plan.BREAKFAST, icon: '🌅' },
@@ -1290,7 +1303,7 @@ export default function App() {
       {FONTS}
       <Sidebar activePage={activePage} setActivePage={setActivePage} patient={patient} user={user} />
       <main className="flex-1 overflow-y-auto" style={{ maxHeight: '100vh' }}>
-        <div className="max-w-5xl mx-auto px-6 md:px-8 py-8 md:py-10">
+        <div key={activePage} className="max-w-5xl mx-auto px-6 md:px-8 py-8 md:py-10 page-enter">
           {activePage === 'dashboard' && <Dashboard patient={patient} setActivePage={setActivePage} />}
           {activePage === 'chatbot' && <Chatbot patient={patient} />}
           {activePage === 'medications' && <MedicationReminder user={user} />}
