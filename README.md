@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# MediCare+ 🏥
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A complete healthcare management platform built as a single-page React application — covering AI-assisted symptom checking, recovery tracking with computer vision, medication adherence, doctor booking, medicine price comparison, insurance claims, and emergency alerts.
 
-## Available Scripts
+**Live app:** [medicare-pluse-2lvl.vercel.app](https://medicare-pluse-2lvl.vercel.app)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+MediCare+ was built to explore what a unified healthcare experience could look like — instead of juggling separate apps for booking doctors, tracking medication, and monitoring recovery, everything lives in one place with a shared patient profile.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The standout feature is the **AI-powered healing photo tracker**: patients upload a daily photo of a wound or surgical site, and a vision model analyzes swelling, discoloration, rashes, and estimated healing progress — flagging concerns before they become complications.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Feature | Description |
+|---|---|
+| 🔐 **Authentication** | Email/password auth via Firebase, with per-user data isolation |
+| 💬 **AI Health Assistant** | Conversational symptom checker with urgency triage, powered by Groq |
+| 📷 **Healing Photo Tracker** | Daily photo uploads analyzed by a vision LLM — tracks swelling, rashes, healing % over time |
+| ⏰ **Medication Reminder** | Add medications with custom dose times, daily check-off tracking with adherence percentage |
+| 📋 **Patient History** | Centralized record of allergies, current medications, and a timeline of medical records |
+| 🩺 **Doctor Booking** | Browse and book consultations by specialty, rating, and price |
+| 💊 **Medicine Marketplace** | Compare prices across pharmacies, order with one click |
+| 🥗 **Diet Plan** | Condition-aware nutrition suggestions (diabetes, hypertension, cardiac, general) |
+| 🚨 **Emergency Alert** | One-tap alert flow that shares medical profile with emergency contacts and nearest hospital |
+| 🗂️ **Insurance Claims** | Submit claims with automatic deductible/co-pay reimbursement calculation |
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Frontend:** React (Create React App), plain CSS utility classes
+- **Backend:** Firebase Authentication + Firestore (real-time, per-user data)
+- **AI:** Groq API — `openai/gpt-oss-120b` for chat, `qwen/qwen3.6-27b` for vision analysis
+- **Hosting:** Vercel (auto-deploys on push to `main`)
+- **Design:** Custom design system — Fraunces (display) + Inter (body) + IBM Plex Mono (data)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Architecture Notes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- All patient data is scoped under `patients/{uid}` in Firestore, with subcollections for records, bookings, orders, healing photos, and claims — enforcing per-user isolation.
+- The AI chatbot and vision analysis run client-side against Groq's API using an environment variable (`REACT_APP_GROQ_API_KEY`), keeping the app fully serverless.
+- Diet plans are rule-based (condition → meal plan mapping) rather than AI-generated, prioritizing reliability and zero API cost for a frequently-used feature.
 
-### `npm run eject`
+## Running Locally
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/akshayasivagami3-droid/Medicare-Pluse.git
+cd Medicare-Pluse/medicare
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a `.env` file in the project root:
+```
+REACT_APP_GROQ_API_KEY=your_groq_api_key_here
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You'll also need your own Firebase project — update the `firebaseConfig` object in `src/App.js` with your project's credentials, and enable Email/Password Authentication and Firestore Database in test mode.
 
-## Learn More
+## Roadmap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [ ] Video consultation integration
+- [ ] Push notifications for medication reminders
+- [ ] Multi-language support (Tamil, Hindi)
+- [ ] Caregiver/family profile sharing
+- [ ] Wearable device sync (Fitbit, Google Fit)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Author
 
-### Code Splitting
+Built by M.Akshaya Sivagami — a project exploring full-stack development, AI integration, and product design as part of a transition from ECE into software engineering.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*This project uses free-tier services (Firebase Spark plan, Groq free tier, Vercel Hobby plan) and is intended as a portfolio/demo project, not a production medical application. It does not provide medical diagnoses and should not be used as a substitute for professional healthcare advice.*
