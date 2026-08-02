@@ -922,7 +922,7 @@ NOTE: [one sentence summary, max 20 words]`;
       {latest && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <Card className="overflow-hidden relative">
-            <img src={latest.thumbnail} alt="Latest healing photo" className="w-full h-56 object-cover" />
+            <img src={latest.thumbnail} alt="Healing progress" className="w-full h-56 object-cover" />
             <button onClick={() => deletePhoto(latest.id)}
               className="absolute top-2 right-2 px-2.5 py-1 rounded-lg text-xs font-medium"
               style={{ background: 'rgba(0,0,0,0.6)', color: '#fff' }}>Delete</button>
