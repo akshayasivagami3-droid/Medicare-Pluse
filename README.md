@@ -4,6 +4,13 @@ A complete healthcare management platform built as a single-page React applicati
 
 **Live app:** [medicare-pluse-2lvl.vercel.app](https://medicare-pluse-2lvl.vercel.app)
 
+## Screenshots
+Login<img width="1315" height="611" alt="image" src="https://github.com/user-attachments/assets/cac8a07a-f92e-4751-901f-afe778c9698d" />
+Dashboard<img width="1887" height="882" alt="image" src="https://github.com/user-attachments/assets/8bb35e0b-9a56-4a89-b109-19d588ab8188" />
+AI Assistant<img width="1600" height="743" alt="image" src="https://github.com/user-attachments/assets/77972dc6-8932-4a4a-81e4-64e251b28f3b" />
+Healing Tracker<img width="1600" height="752" alt="image" src="https://github.com/user-attachments/assets/61c5682c-288c-441f-8b08-12e3fb6d7754" />
+
+
 ---
 
 ## Overview
